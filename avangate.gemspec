@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["leo.majowka@gmail.com"]
 
   spec.summary       = "Avangate integration for Ruby on Rails using their SOAP API with Savon"
-  spec.description   = "Avangate integration for Ruby on Rails using their SOAP API with Savon"
+  spec.description   = "Avangate integration for Ruby on Rails using their SOAP API with Savon. Methods #login"
   spec.homepage      = "https://github.com/lmajowka/avangate"
   spec.license       = "MIT"
 
