@@ -48,7 +48,7 @@ module Avangate
     end
 
     def self.hash
-      OpenSSL::HMAC.hexdigest  OpenSSL::Digest::Digest.new('md5'), secret_key, data_for_hash
+      OpenSSL::HMAC.hexdigest  OpenSSL::Digest.new('md5'), secret_key, data_for_hash
     end
 
   end
