@@ -1,5 +1,6 @@
 require "avangate/version"
 require "avangate/base"
+require "savon"
 
 module Avangate
 
