@@ -51,5 +51,4 @@ module Avangate
     end
 
   end
-  end
 end
