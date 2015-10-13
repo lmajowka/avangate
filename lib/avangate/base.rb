@@ -2,11 +2,11 @@ module Avangate
     class Base
       class << self
 
-        def merchant_code(code)
+        def merchant_code=(code)
           @@merchant_code = code
         end
 
-        def secret_key(key)
+        def secret_key=(key)
           @@secret_key = key
         end
 
