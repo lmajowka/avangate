@@ -22,8 +22,8 @@ Or install it yourself as:
 
 You need to provide your secret key and your merchant code, both you can get when you sign in to avangate website, then you need to create an initializer (avangate.rb) an set up:
 
-pre. Avangate::Base.secret_key = "SECRET_KEY"
-pre. Avangate::Base.merchant_code = "MERCHANT_CODE"
+    Avangate::Base.secret_key = "SECRET_KEY"
+    Avangate::Base.merchant_code = "MERCHANT_CODE"
 
 ## Usage
 
