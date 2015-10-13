@@ -1,7 +1,7 @@
+require "savon"
 require "avangate/version"
 require "avangate/base"
 require "avangate/errors"
-require "savon"
 
 module Avangate
 
