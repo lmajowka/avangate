@@ -1,5 +1,6 @@
 require "avangate/version"
 require "avangate/base"
+require "avangate/errors"
 require "savon"
 
 module Avangate
@@ -12,7 +13,6 @@ module Avangate
         response = client.call :login, message: login_params
         return response.body.first[1].first[1]
       rescue Savon::SOAPFault => e
-        AppLogger.logger.info("Avangate Authentication ERROR: #{e.message}")
         return false
       end
     end
