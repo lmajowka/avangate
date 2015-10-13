@@ -1,8 +1,10 @@
 # Avangate
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/avangate`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem is a library to interact with Avangate SOAP API
 
-TODO: Delete this and the text above, and describe your gem
+Current methods implemented:
+
+    #login
 
 ## Installation
 
@@ -20,14 +22,18 @@ Or install it yourself as:
 
     $ gem install avangate
 
-You need to provide your secret key and your merchant code, both you can get when you sign in to avangate website, then you need to create an initializer (avangate.rb) an set up:
+You need to provide your secret key and your merchant code, both you can get when you sign in to avangate website, then you need to create an initializer
+
+    config/initializers/avangate.rb
+
+Inside you can and set up:
 
     Avangate::Base.secret_key = "SECRET_KEY"
     Avangate::Base.merchant_code = "MERCHANT_CODE"
 
 ## Usage
 
-TODO: Write usage instructions here
+    sessionId = Avangate::SOAP.login
 
 ## Development
 
