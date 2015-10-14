@@ -6,6 +6,7 @@ Current methods implemented:
 
     #login
     #addProduct
+    #setBillingDetails
 
 ## Installation
 
@@ -36,6 +37,17 @@ Inside you can and set up:
 
     @sessionId = Avangate::SOAP.login
     Avangate::SOAP.add_product({session_id: @sessionId, product_id: 423221})
+    Avangate::SOAP.set_billing_details({
+                                               session_id: @sessionId,
+                                               address: '4 street',
+                                               city: 'dream city',
+                                               country: 'US',
+                                               email: 'john.doe@example.com',
+                                               first_name: 'John',
+                                               last_name: 'Doe',
+                                               postal_code: '12333',
+                                               state: 'Alabama'
+                                           })
 
 ## Development
 
