@@ -6,6 +6,7 @@ require "avangate/errors"
 module Avangate
 
   END_POINT = 'https://api.avangate.com/order/2.3/soap/?wsdl'
+  STATE_REQUIRED_COUNTRIES = ['US','RO','BR']
 
   class SOAP
     def self.login
@@ -28,6 +29,34 @@ module Avangate
 
       }
       response = client.call :add_product, message: params
+      return response.body.first[1].first[1]
+    end
+
+    def self.set_billing_details(options={})
+      raise MissingSessionId, "missing param session_id" unless options[:session_id].presence
+      raise MissingAddress, "missing param address" unless options[:address].presence
+      raise MissingCity, "missing param city" unless options[:city].presence
+      raise MissingCountry, "missing param country" unless options[:country].presence
+      raise MissingEmail, "missing param email" unless options[:email].presence
+      raise MissingFirstName, "missing param first_name" unless options[:first_name].presence
+      raise MissingLastName, "missing param last_name" unless options[:last_name].presence
+      raise MissingPostalCode, "missing param postal_code" unless options[:postal_code].presence
+      raise MissingState, "missing param state" unless options[:postal_code].presence or !STATE_REQUIRED_COUNTRIES.include? options[:country]
+      billing_details = {
+          Address: options[:address],
+          City: options[:city],
+          Country: options[:email],
+          Email: options[:email],
+          FirstName: options[:first_name],
+          LastName: options[:last_name],
+          PostalCode: options[:postal_code],
+          State: options[:postal_code]
+      }
+      params = {
+          sessionID: options[:session_id],
+          BillingDetails: billing_details
+      }
+      response = client.call :set_billing_details, message: params
       return response.body.first[1].first[1]
     end
 
