@@ -5,6 +5,7 @@ This gem is a library to interact with Avangate SOAP API
 Current methods implemented:
 
     #login
+    #addProduct
 
 ## Installation
 
@@ -33,7 +34,8 @@ Inside you can and set up:
 
 ## Usage
 
-    sessionId = Avangate::SOAP.login
+    @sessionId = Avangate::SOAP.login
+    Avangate::SOAP.add_product({session_id: @sessionId, product_id: 423221})
 
 ## Development
 
