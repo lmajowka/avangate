@@ -10,5 +10,6 @@ module Avangate
 
   class MissingSecretKey < AvangateError; end
   class MissingMerchantCode < AvangateError; end
-
+  class MissingSessionId < AvangateError; end
+  class MissingProductId < AvangateError; end
 end
