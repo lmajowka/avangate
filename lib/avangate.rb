@@ -17,7 +17,7 @@ module Avangate
       end
     end
 
-    def self.addProduct(options={})
+    def self.add_product(options={})
       raise MissingSessionId, "missing param session_id" unless options[:session_id].presence
       raise MissingProductId, "missing param product_id" unless options[:product_id].presence
       quantity = options[:quantity].presence ? options[:quantity] : 1
@@ -27,7 +27,7 @@ module Avangate
           Quantity: quantity
 
       }
-      response = client.call :addProduct, message: params
+      response = client.call :add_product, message: params
       return response.body.first[1].first[1]
     end
 
