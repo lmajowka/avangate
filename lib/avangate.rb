@@ -42,16 +42,15 @@ module Avangate
       raise MissingLastName, "missing param last_name" unless options[:last_name].presence
       raise MissingPostalCode, "missing param postal_code" unless options[:postal_code].presence
       raise MissingState, "missing param state" unless options[:state].presence or !STATE_REQUIRED_COUNTRIES.include? options[:country]
-      billing_details = {
-          Address: options[:address],
-          City: options[:city],
-          Country: options[:country],
-          Email: options[:email],
-          FirstName: options[:first_name],
-          LastName: options[:last_name],
-          PostalCode: options[:postal_code],
-          State: options[:state]
-      }
+      billing_details = {}
+      billing_details['Address'] = options[:address]
+      billing_details['City'] =  options[:city]
+      billing_details['Country'] =  options[:country]
+      billing_details['Email'] =  options[:email]
+      billing_details['FirstName'] =  options[:first_name]
+      billing_details['LastName'] =  options[:last_name]
+      billing_details['PostalCode'] =  options[:postal_code]
+      billing_details['State'] =  options[:state]
       params = {
           sessionID: options[:session_id],
           BillingDetails: billing_details
