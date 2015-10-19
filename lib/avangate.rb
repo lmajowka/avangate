@@ -12,7 +12,7 @@ module Avangate
     def self.login
       begin
         response = client.call :login, message: login_params
-        return response.body.first[1].first[1]
+        return response.body[:login_response][:login_return]
       rescue Savon::SOAPFault => e
         return false
       end
@@ -23,7 +23,7 @@ module Avangate
       require_session_id
       require_product_id
       response = client.call :add_product, message: add_product_params
-      return response.body.first[1].first[1]
+      return response.body[:add_product_response][:add_product_return]
     end
 
     def self.set_billing_details(options={})
@@ -31,7 +31,7 @@ module Avangate
       require_session_id
       require_set_billing_details_params
       response = client.call :set_billing_details, message: set_billing_details_params
-      return response.body.first[1].first[1]
+      return response.body[:set_billing_details_response][:set_billing_details_return]
     end
 
     def self.get_product_by_code(options={})
@@ -39,7 +39,7 @@ module Avangate
       require_session_id
       require_product_code
       response = client.call :get_product_by_code, message: get_product_by_code_params
-      return response.body.first[1].first[1]
+      return response.body[:get_product_by_code_response][:get_product_by_code_return]
     end
 
     private
