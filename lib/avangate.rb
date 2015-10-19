@@ -19,9 +19,11 @@ module Avangate
     end
 
     def self.add_product(options={})
-      raise MissingSessionId, "missing param session_id" unless options[:session_id].presence
-      raise MissingProductId, "missing param product_id" unless options[:product_id].presence
-      quantity = options[:quantity].presence ? options[:quantity] : 1
+      @options = options
+      require_session_id
+      require_product_id
+
+      quantity = options[:quantity] ? options[:quantity] : 1
       params = {
           sessionID: options[:session_id],
           ProductId: options[:product_id],
@@ -33,24 +35,10 @@ module Avangate
     end
 
     def self.set_billing_details(options={})
-      raise MissingSessionId, "missing param session_id" unless options[:session_id].presence
-      raise MissingAddress, "missing param address" unless options[:address].presence
-      raise MissingCity, "missing param city" unless options[:city].presence
-      raise MissingCountry, "missing param country" unless options[:country].presence
-      raise MissingEmail, "missing param email" unless options[:email].presence
-      raise MissingFirstName, "missing param first_name" unless options[:first_name].presence
-      raise MissingLastName, "missing param last_name" unless options[:last_name].presence
-      raise MissingPostalCode, "missing param postal_code" unless options[:postal_code].presence
-      raise MissingState, "missing param state" unless options[:state].presence or !STATE_REQUIRED_COUNTRIES.include? options[:country]
-      billing_details = {}
-      billing_details['Address'] = options[:address]
-      billing_details['City'] =  options[:city]
-      billing_details['Country'] =  options[:country]
-      billing_details['Email'] =  options[:email]
-      billing_details['FirstName'] =  options[:first_name]
-      billing_details['LastName'] =  options[:last_name]
-      billing_details['PostalCode'] =  options[:postal_code]
-      billing_details['State'] =  options[:state]
+      @options = options
+      require_session_id
+      require_set_billing_details_params
+
       params = {
           sessionID: options[:session_id],
           BillingDetails: billing_details
@@ -59,7 +47,42 @@ module Avangate
       return response.body.first[1].first[1]
     end
 
+    def self.get_product_by_code(options={})
+      raise MissingSessionId, "missing param session_id" unless options[:session_id]
+    end
+
     private
+
+    def self.require_session_id
+      raise MissingSessionId, "missing param session_id" unless @options[:session_id]
+    end
+
+    def self.require_product_id
+      raise MissingProductId, "missing param product_id" unless @options[:product_id]
+    end
+
+    def self.require_set_billing_details_params
+      raise MissingAddress, "missing param address" unless @options[:address]
+      raise MissingCity, "missing param city" unless @options[:city]
+      raise MissingCountry, "missing param country" unless @options[:country]
+      raise MissingEmail, "missing param email" unless @options[:email]
+      raise MissingFirstName, "missing param first_name" unless @options[:first_name]
+      raise MissingLastName, "missing param last_name" unless @options[:last_name]
+      raise MissingPostalCode, "missing param postal_code" unless @options[:postal_code]
+      raise MissingState, "missing param state" unless @options[:state] or !STATE_REQUIRED_COUNTRIES.include? @options[:country]
+    end
+
+    def self.billing_details
+      billing_details = {}
+      billing_details['Address'] = @options[:address]
+      billing_details['City'] =  @options[:city]
+      billing_details['Country'] =  @options[:country]
+      billing_details['Email'] =  @options[:email]
+      billing_details['FirstName'] =  @options[:first_name]
+      billing_details['LastName'] =  @options[:last_name]
+      billing_details['PostalCode'] =  @options[:postal_code]
+      billing_details['State'] =  @options[:state]
+    end
 
     def self.client
       @client ||= Savon.client(wsdl: END_POINT)
