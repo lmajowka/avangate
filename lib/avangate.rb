@@ -22,15 +22,7 @@ module Avangate
       @options = options
       require_session_id
       require_product_id
-
-      quantity = options[:quantity] ? options[:quantity] : 1
-      params = {
-          sessionID: options[:session_id],
-          ProductId: options[:product_id],
-          Quantity: quantity
-
-      }
-      response = client.call :add_product, message: params
+      response = client.call :add_product, message: add_product_params
       return response.body.first[1].first[1]
     end
 
@@ -38,17 +30,16 @@ module Avangate
       @options = options
       require_session_id
       require_set_billing_details_params
-
-      params = {
-          sessionID: options[:session_id],
-          BillingDetails: billing_details
-      }
-      response = client.call :set_billing_details, message: params
+      response = client.call :set_billing_details, message: set_billing_details_params
       return response.body.first[1].first[1]
     end
 
     def self.get_product_by_code(options={})
-      raise MissingSessionId, "missing param session_id" unless options[:session_id]
+      @options = options
+      require_session_id
+      require_product_code
+      response = client.call :get_product_by_code, message: get_product_by_code_params
+      return response.body.first[1].first[1]
     end
 
     private
@@ -59,6 +50,10 @@ module Avangate
 
     def self.require_product_id
       raise MissingProductId, "missing param product_id" unless @options[:product_id]
+    end
+
+    def self.require_product_code
+      raise MissingProductCode, "missing param product_code" unless @options[:product_code]
     end
 
     def self.require_set_billing_details_params
@@ -82,6 +77,7 @@ module Avangate
       billing_details['LastName'] =  @options[:last_name]
       billing_details['PostalCode'] =  @options[:postal_code]
       billing_details['State'] =  @options[:state]
+      billing_details
     end
 
     def self.client
@@ -93,6 +89,29 @@ module Avangate
           MerchantCode: merchant_code,
           Date: now,
           hash: hash
+      }
+    end
+
+    def self.add_product_params
+      quantity = @options[:quantity] ? @options[:quantity] : 1
+      {
+        sessionID: @options[:session_id],
+        ProductId: @options[:product_id],
+        Quantity: quantity
+      }
+    end
+
+    def self.set_billing_details_params
+      {
+          sessionID: @options[:session_id],
+          BillingDetails: billing_details
+      }
+    end
+
+    def self.get_product_by_code_params
+      {
+        sessionID: @options[:session_id],
+        ProductCode: @options[:product_code]
       }
     end
 

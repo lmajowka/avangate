@@ -20,4 +20,5 @@ module Avangate
   class MissingLastName < AvangateError; end
   class MissingPostalCode < AvangateError; end
   class MissingState < AvangateError; end
+  class MissingProductCode < AvangateError; end
 end
