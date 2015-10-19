@@ -10,8 +10,11 @@ module Avangate
 
     describe '#add_product' do
 
-      it 'should require session and product id' do
+      it 'should require session_id and product id' do
         expect { Avangate::SOAP.add_product }.to raise_error MissingSessionId
+      end
+
+      it 'should require product_id' do
         expect { Avangate::SOAP.add_product({session_id: 1}) }.to raise_error MissingProductId
       end
 
