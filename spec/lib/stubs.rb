@@ -1,21 +1,23 @@
 class ClientStub
   def call(method, params)
-    id = 0
-    id = 1 if method == :login
-    id = 2 if method == :add_product
-    id = 3 if method == :set_billing_details
-    id = 4 if method == :get_product_by_code
-    ResponseStub.new id
+    ResponseStub.new method
   end
 end
 
 class ResponseStub
 
-  def initialize(id)
-    @id = id
+  def initialize(method)
+    @method = method
   end
 
   def body
-    [[0,[[0,@id],0]],[0,[0,0]]]
+    response = {}
+    response[response_symbol('response')] = {}
+    response[response_symbol('response')][response_symbol('return')] = 1
+    response
+  end
+
+  def response_symbol(suffix)
+    "#{@method.to_s}_#{suffix}".to_sym
   end
 end

@@ -39,7 +39,7 @@ module Avangate
       end
 
       it 'should return 2' do
-        expect(Avangate::SOAP.add_product({session_id: 1, product_id: 1})).to eq(2)
+        expect(Avangate::SOAP.add_product({session_id: 1, product_id: 1})).to eq(1)
       end
 
     end
@@ -61,7 +61,7 @@ module Avangate
       end
 
       it 'should return 4' do
-        expect(Avangate::SOAP.get_product_by_code({session_id: 1, product_code: 1})).to eq(4)
+        expect(Avangate::SOAP.get_product_by_code({session_id: 1, product_code: 1})).to eq(1)
       end
 
     end
