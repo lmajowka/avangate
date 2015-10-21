@@ -7,6 +7,7 @@ Current methods implemented:
     #login
     #addProduct
     #setBillingDetails
+    #get_product_by_code
 
 ## Installation
 
@@ -33,27 +34,28 @@ Inside you can and set up:
     Avangate::Base.secret_key = "SECRET_KEY"
     Avangate::Base.merchant_code = "MERCHANT_CODE"
 
-## Usage
+## Example of usage
 
     @sessionId = Avangate::SOAP.login
     Avangate::SOAP.add_product({session_id: @sessionId, product_id: 423221})
     Avangate::SOAP.set_billing_details({
-                                               session_id: @sessionId,
-                                               address: '4 street',
-                                               city: 'dream city',
-                                               country: 'US',
-                                               email: 'john.doe@example.com',
-                                               first_name: 'John',
-                                               last_name: 'Doe',
-                                               postal_code: '12333',
-                                               state: 'Alabama'
-                                           })
+      session_id: @sessionId,
+      address: '4 street',
+      city: 'dream city',
+      country: 'US',
+      email: 'john.doe@example.com',
+      first_name: 'John',
+      last_name: 'Doe',
+      postal_code: '12333',
+      state: 'Alabama'
+    })
 
-## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+    product = Avangate::SOAP.get_product_by_code({
+      session_id: @sessionId,
+      product_code: 123
+    })
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
