@@ -3,7 +3,7 @@ require 'lib/stubs.rb'
 
 module Avangate
 
-  describe Notifications do
+  describe Notification do
 
     before :each do
 
@@ -12,10 +12,10 @@ module Avangate
     end
 
 
-    let (:notification) { Avangate::Notifications.new({
+    let (:notification) { Avangate::Notification.new({
                                                           IPN_PID:["1"],
                                                           IPN_PNAME:['Software program'],
-                                                          DATE: "20050303123434"
+                                                          IPN_DATE: "20050303123434"
                                                       }) }
 
     it 'generates a receipts' do

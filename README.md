@@ -12,7 +12,7 @@ Current methods implemented:
     #setBillingDetails
     #get_product_by_code
 
-    Notifications:
+    Notification:
 
     #generate_receipt
 
@@ -68,7 +68,8 @@ Inside you can and set up:
 
     IPN:
 
-    render text: Avangate::Notification.generate_receipt
+    notification = Avangate::Notification.new params
+    render text: notification.generate_receipt
 
 
 ## Contributing

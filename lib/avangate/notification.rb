@@ -1,11 +1,11 @@
 module Avangate
 
-  class Notifications
+  class Notification
 
     def initialize(params)
       @ipn_pid0 = params[:IPN_PID].first
       @ipn_pname0 = params[:IPN_PNAME].first
-      @date = params[:DATE]
+      @date = params[:IPN_DATE]
     end
 
     def generate_receipt
