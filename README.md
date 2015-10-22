@@ -1,13 +1,20 @@
 # Avangate
 
 This gem is a library to interact with Avangate SOAP API
+And to manage IPN - Payment Notifications
 
 Current methods implemented:
+
+    SOAP:
 
     #login
     #addProduct
     #setBillingDetails
     #get_product_by_code
+
+    Notifications:
+
+    #generate_receipt
 
 ## Installation
 
@@ -36,6 +43,8 @@ Inside you can and set up:
 
 ## Example of usage
 
+    SOAP:
+
     @sessionId = Avangate::SOAP.login
     Avangate::SOAP.add_product({session_id: @sessionId, product_id: 423221})
     Avangate::SOAP.set_billing_details({
@@ -55,6 +64,11 @@ Inside you can and set up:
       session_id: @sessionId,
       product_code: 123
     })
+
+
+    IPN:
+
+    render text: Avangate::Notification.generate_receipt
 
 
 ## Contributing

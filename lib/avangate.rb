@@ -2,6 +2,7 @@ require "savon"
 require "avangate/version"
 require "avangate/base"
 require "avangate/errors"
+require "avangate/notifications"
 
 module Avangate
 

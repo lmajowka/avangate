@@ -44,7 +44,7 @@ module Avangate
 
     end
 
-    describe '#get_product_by_code' do
+      describe '#get_product_by_code' do
 
       before :each do
         allow(Avangate::SOAP).to receive(:client) do
