@@ -1,5 +1,7 @@
 # Avangate
 
+[![Gem Version](https://badge.fury.io/rb/avangate.svg)](https://badge.fury.io/rb/avangate)
+
 This gem is a library to interact with Avangate SOAP API
 And to manage IPN - Payment Notifications
 
