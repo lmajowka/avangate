@@ -6,7 +6,8 @@ require "avangate/notification"
 
 module Avangate
 
-  END_POINT = 'https://api.avangate.com/order/2.3/soap/?wsdl'
+  #END_POINT = 'https://api.avangate.com/order/2.3/soap/?wsdl'
+  END_POINT = 'https://api.avangate.com/soap/3.0/?wsdl'
   STATE_REQUIRED_COUNTRIES = ['US','RO','BR']
 
   class SOAP
@@ -17,6 +18,14 @@ module Avangate
       rescue Savon::SOAPFault => e
         return false
       end
+    end
+
+    def self.update_product(options={})
+      @options = options
+      require_session_id
+      require_product_id
+      response = client.call :update_product, message: add_product_params
+      return response.body[:update_product_response][:update_product_return]
     end
 
     def self.add_product(options={})
