@@ -7,7 +7,7 @@ require "avangate/notification"
 module Avangate
 
   #END_POINT = 'https://api.avangate.com/order/2.3/soap/?wsdl'
-  END_POINT = 'https://api.avangate.com/soap/3.0/?wsdl'
+  END_POINT = 'https://api.avangate.com/product/2.0/soap/?wsdl'
   STATE_REQUIRED_COUNTRIES = ['US','RO','BR']
 
   class SOAP
